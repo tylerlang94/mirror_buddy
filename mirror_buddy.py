@@ -8,19 +8,18 @@ def ping_mirror(url):
     for url in mirrors:
         os.popen(url)
 
-url='https://mirrors.opensuse.org'
-http = httplib2.Http()
-    
-response, content = http.request(url)
+def mirror_list(url, http):   
+    response, content = http.request(url)
+    mirrors = []
 
-mirrors = []
+    for mirror in BeautifulSoup(content, features="lxml").findAll('a', href=True):
+        mirrors.append(mirror['href'])
 
-for mirror in BeautifulSoup(content, features="lxml").findAll('a', href=True):
-    mirrors.append(mirror['href'])
+    mirrors.remove("https://bugzilla.opensuse.org/")
+    mirrors.remove("https://github.com/openSUSE/mirrorbrain")
 
-mirrors.remove("https://bugzilla.opensuse.org/")
-mirrors.remove("https://github.com/openSUSE/mirrorbrain")
+    print(mirrors)
 
-print(mirrors)
+mirror_list('https://mirrors.opensuse.org', httplib2.Http())
 
 
