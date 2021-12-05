@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
+#imports the needed modules
 import httplib2
 from bs4 import BeautifulSoup, SoupStrainer
 import os
 
+#pings the mirrors
 def ping_mirror(url):
     for url in mirrors:
         os.popen(url)
 
+#pulls the list of mirrors from mirrors.opensuse.org
 def mirror_list(url, http):   
     response, content = http.request(url)
     mirrors = []
