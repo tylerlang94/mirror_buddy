@@ -11,7 +11,6 @@ import os
 def ping_mirror(hostname):
     response = os.system('ping -c 1 ' + hostname)
 
- 
 #pulls the list of mirrors from mirrors.opensuse.org
 def mirror_list(url, http):   
     response, content = http.request(url)
