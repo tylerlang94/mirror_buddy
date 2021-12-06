@@ -26,3 +26,10 @@ def mirror_list(url, http):
     return mirrors
 
 mirrors = mirror_list('https://mirrors.opensuse.org', httplib2.Http())
+
+for mirror in mirrors: 
+    ping_mirror(mirror)
+    if mirror == 0:
+        print(hostname)
+    else:
+        continue
