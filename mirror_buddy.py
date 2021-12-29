@@ -16,9 +16,11 @@ def mirror_list(url, http):
     response, content = http.request(url)
     mirrors = []
 
+    #uses BS4 to scrape the mirror links from mirrors.opensuse.org
     for mirror in BeautifulSoup(content, features="lxml").findAll('a', href=True):
         mirrors.append(mirror['href'])
 
+    #removes the two un-needed links that are at the bottom of the page
     mirrors.remove("https://bugzilla.opensuse.org/")
     mirrors.remove("https://github.com/openSUSE/mirrorbrain")
 
